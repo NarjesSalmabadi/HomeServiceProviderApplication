@@ -16,7 +16,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
     private Boolean enabled=false;
-//    private String photo;
 
     public Integer getId() {
         return id;
@@ -81,21 +80,6 @@ public class User {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
-
-//    public String getPhoto() {
-//        return photo;
-//    }
-//
-//    public void setPhoto(String photo) {
-//        this.photo = photo;
-//    }
-
-//    @Transient
-//    public String getPhotoImagePath() {
-//        if (photo == null || id == null) return null;
-//
-//        return "/user-photos/" + id + "/" + photo;
-//    }
 
 
     @Override

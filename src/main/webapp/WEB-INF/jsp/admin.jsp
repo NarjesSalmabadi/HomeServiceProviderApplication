@@ -300,15 +300,6 @@
                         <select id="sel_user" class="myClass" name="myClass">
                             <option value="0">- Select -</option>
                         </select>
-                        <%--                <form>--%>
-                        <%--                    <div class="form-group" id="selectExpertDropDown">--%>
-                        <%--                    </div>--%>
-                        <%--                </form>--%>
-                        <%--                <form>--%>
-                        <%--                    <div class="form-group">--%>
-                        <%--                        <input type="text" class="form-control" id="expertCode" required>--%>
-                        <%--                    </div>--%>
-                        <%--                </form>--%>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
@@ -473,11 +464,11 @@
                         type: "DELETE",
                         url: "http://localhost:8080/services/deleteService/"+globalServiceId,
                         success: function (value) {
-                            document.getElementById("myId").innerText = JSON.stringify(value);
+                            document.getElementById("myId").innerText = JSON.stringify(value.responseText);
                             document.getElementById(globalServiceId).remove();
                         },
                         error: function (value) {
-                            document.getElementById("myId").innerText = JSON.stringify(value);
+                            document.getElementById("myId").innerText = JSON.stringify(value.responseText);
                         }
                     });
                 })
@@ -700,8 +691,8 @@
                 expertEmail = this.options[this.selectedIndex].value;
             };
             // function getExpertEmail(email){
-            //     expertEmail = email;
-            //     alert(expertEmail);
+            //     customerEmail = email;
+            //     alert(customerEmail);
             // }
         </script>
     </div> <!-- /#page-content-wrapper -->

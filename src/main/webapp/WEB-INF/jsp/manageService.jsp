@@ -267,15 +267,6 @@
                 <select id="sel_user" class="myClass" name="myClass">
                     <option value="0">- Select -</option>
                 </select>
-<%--                <form>--%>
-<%--                    <div class="form-group" id="selectExpertDropDown">--%>
-<%--                    </div>--%>
-<%--                </form>--%>
-<%--                <form>--%>
-<%--                    <div class="form-group">--%>
-<%--                        <input type="text" class="form-control" id="expertCode" required>--%>
-<%--                    </div>--%>
-<%--                </form>--%>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
@@ -569,7 +560,7 @@
         var msg ="";
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/expertProfile/selectService/"+expertEmail,
+            url: "http://localhost:8080/expertProfile1/selectService/"+expertEmail,
             data: {"subServiceId":globalSubServiceId},
             dataType:"json",
             success: function (value) {
@@ -605,7 +596,7 @@
         $("#deleteExpertFromSubService").click(function () {
             $.ajax({
                 type: "DELETE",
-                url: "http://localhost:8080/expertProfile/deleteService/" + globalExpertId,
+                url: "http://localhost:8080/expertProfile1/deleteService/" + globalExpertId,
                 data: {"subServiceId": globalSubServiceId},
                 dataType: "json",
                 success: function (value) {
@@ -667,8 +658,8 @@
         expertEmail = this.options[this.selectedIndex].value;
     };
     // function getExpertEmail(email){
-    //     expertEmail = email;
-    //     alert(expertEmail);
+    //     customerEmail = email;
+    //     alert(customerEmail);
     // }
 </script>
 </body>

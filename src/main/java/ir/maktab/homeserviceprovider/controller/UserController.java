@@ -176,7 +176,6 @@ public class UserController {
             userService.sendConfirmationMail(user.getEmail(), confirmationToken.getConfirmationToken());
         }
         model.addAttribute(user);
-        //ModelAndView modelAndView = new ModelAndView("welcome", "user", user);
         return "welcome";
     }
 

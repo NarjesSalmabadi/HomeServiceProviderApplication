@@ -21,4 +21,6 @@ public class BusinessException {
 
     public static String No_Reservation_Was_Founded = "No reservation was founded!";
     public static String Reservation_State_Must_Be_Meaningful = "Reservation state must be meaningful";
+
+    public static String No_User_Founded_By_This_Email = "No user was founded by this email";
 }

@@ -43,7 +43,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         } else if (hasAdminRole) {
             redirectStrategy.sendRedirect(arg0, arg1, "/admin");
         }else if(hasCustomerRole){
-            redirectStrategy.sendRedirect(arg0, arg1, "/customerProfile");
+            redirectStrategy.sendRedirect(arg0, arg1, "/");
         } else {
             throw new IllegalStateException();
         }

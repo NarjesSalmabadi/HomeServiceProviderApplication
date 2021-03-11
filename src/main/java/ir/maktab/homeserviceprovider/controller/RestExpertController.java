@@ -129,16 +129,12 @@ public class RestExpertController {
 
     @GetMapping("/expertProfile1")
     public String getExpertProfilePage(Model model) {
-//        Expert expert = expertService.findExpertById(4);
-//        model.addAttribute("expert", expert);
         return "expertProfile1";
     }
 
     @GetMapping("/expertProfile1/getExpert")
     public Expert getExpertForProfilePage(@RequestParam(value = "expertEmail") String email) {
         Expert expert = expertService.findByEmail(email);
-//        Expert expert = expertService.findExpertById(4);
-//        model.addAttribute("expert", expert);
         return expert;
     }
 
@@ -239,16 +235,4 @@ public class RestExpertController {
             return ResponseEntity.badRequest().body(BusinessException.No_Reservation_Was_Founded);
         }
     }
-    /*@PostMapping
-    @ResponseBody
-    public ModelAndView createNewExpert(@ModelAttribute("expert") Expert expert, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        expert.setPhoto(fileName);
-        expert.setUserRole(UserRole.EXPERT);
-        expert.setConfirmationState(ConfirmationState.WAITING_TO_BE_CONFIRMED);
-        Expert savedExpert = expertService.registerExpert(expert);
-        String uploadDir = "user-photos/" + savedExpert.getId();
-        fileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        return new ModelAndView("admin", "expert", savedExpert);
-    }*/
 }

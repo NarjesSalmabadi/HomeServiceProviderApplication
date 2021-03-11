@@ -21,7 +21,7 @@
     </c:if>
 
     <c:if test="${empty expert}">
-        <%--        <script>var expertId="${expert.id}"</script>--%>
+        <%--        <script>var customerId="${expert.id}"</script>--%>
         <p>Hello guest</p>
     </c:if>
 </h2>
@@ -149,7 +149,7 @@
             for(i=0;i<arrayOfRows.length;i++){
                 var currentRow=arrayOfRows[i];
                 var subServiceId = currentRow.find("td:eq(0)").text();
-                //alert(parseInt(expertId));
+                //alert(parseInt(customerId));
                 $.ajax({
                     type:"POST",
                     url:"http://localhost:8080/expertProfile1/selectService/"+expertEmail,

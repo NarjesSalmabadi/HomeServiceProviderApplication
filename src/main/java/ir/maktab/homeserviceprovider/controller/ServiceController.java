@@ -68,6 +68,22 @@ public class ServiceController {
 
     }
 
+    @GetMapping ("/hasSubServices")
+    public List<Services> getAllServicesHasSubServices() {
+        List<Services> servicesList = servicesService.findAll();
+        if (!servicesList.isEmpty()) {
+            for(int i=servicesList.size()-1;i>=0;i--){
+               if(subServicesService.findByServiceId(servicesList.get(i).getId()).isEmpty()){
+                   servicesList.remove(servicesList.get(i));
+               };
+            }
+            return servicesList;
+        } else {
+            throw new NullPointerException(BusinessException.No_Service_Was_Found);
+        }
+
+    }
+
     @GetMapping("/subServices/{id}")
     public List<SubServices> getAllSubServicesByServiceId(@PathVariable("id") int id) {
         List<SubServices> subServices = subServicesService.findByServiceId(id);

@@ -2,16 +2,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link href="<c:url value="/resources/theme/css/style.css"/>" rel="stylesheet">
     <title>Home</title>
     <style>
         .hDiv   {height: 150px;}
     </style>
 </head>
-<body>
+<body  onload="serviceLoad()">
 <nav class="navbar navbar-expand navbar-dark bg-primary">
     <div>
         <ul class="navbar-nav mr-auto">
@@ -28,38 +31,39 @@
         <form class="form-inline my-2 my-md-0"> </form>
     </div>
 </nav>
-<div class="d-flex text-dark bg-info justify-content-center p-3 hDiv" style="background:transparent url('/resources/theme/images/3.jpg') no-repeat center center /cover">>
+<div class="d-flex text-dark bg-info justify-content-center p-3 hDiv" style="background:transparent url('/resources/theme/images/3.jpg') no-repeat center center /cover">
     <h1>ارائه خدمات منزل</h1>
 </div>
 <nav class="navbar navbar-expand navbar-dark bg-light">
-    <div id="service">
+    <div class="btn-group" id="service">
     </div>
 </nav>
 
 <script>
-    $(document).ready(function () {
+    function serviceLoad() {
         var msg = "";
+        var msg2 = ""
+        var div = document.getElementById("service");
         $.ajax({
             type: "GET",
-            url: "http://localhost:8080/services",
+            url: "http://localhost:8080/services/hasSubServices",
+            async:false,
             success: function (result) {
-                if(result) {
-                    $.each(result, function (index, value) {
-                        $('#service').append("<button class=\"btn btn-secondary dropdown-toggle\"  type=\"button\" onclick=\"dropFunc( "+value.id+ ")\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-                            value.title + "</button>"+"<div class=\"dropdown-menu\"  id=\"x_"+value.id+"\"></div>");
-                    });
-                }
+                $.each(result, function (index, value) {
+                    msg +=
+                        "<div class=\"dropdown\"><button class=\"btn light dropdown-toggle\"  type=\"button\" onclick=\"dropFunc( "+value.id+ ")\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+                        value.title +
+                        "</button>"+"<div class=\"dropdown-menu\"  id=\"x_"+value.id+"\"></div></div>"
+                });
+
+                $(msg).appendTo("#service");
+                // document.getElementById("serviceDiv").appendChild(msg);
             },
             error: function (result) {
                 $("#myId").text("در حال حاضر هیچ خدمتی در سایت تعریف نشده است");
             }
         });
-        $("#myId").text(" ");
-        $(".dropdown-toggle").click(function(){
-            //  $(this).find(".dropdown-menu").slideToggle();
-            $('.dropdown-toggle').dropdown()
-        });
-    });
+    }
 
     function dropFunc(id){
         document.getElementById("x_"+id).innerHTML="";
@@ -70,21 +74,18 @@
             success: function (result) {
                 $.each(result, function (index, value) {
                     //msg2 +=
-                    $("#x_"+id).append("<a class=\"dropdown-item\" href=\"/home/subService/"+value.id+"\" >"+value.title+"</a>");
+                    msg2+="<a class=\"dropdown-item\" href=\"/showSubService/"+value.id+"\">"+value.title+"</a>";
                 });
                 $("#x_"+id).append(msg2);
-                //$(msg2).appendTo(id);
-                //$("#myId").innerHTML="";
-
-
-                // document.getElementById("serviceDiv").appendChild(msg);
+                $(msg2).appendTo(id);
             },
             error: function (result) {
                 $("#myId").text(JSON.stringify(result));
             }
         });
-
     }
+
+
 </script>
 </body>
 </html>

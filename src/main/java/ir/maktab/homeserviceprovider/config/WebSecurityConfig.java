@@ -27,19 +27,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/resources/theme/css/**", "/resources/theme/js/**", "/resources/theme/images/**","/user/**","/","/home","/home/subService/**","/user/home/**","/user/register",
+                .antMatchers("/resources/theme/css/**", "/resources/theme/js/**", "/resources/theme/images/**","/user/**","/","/**","/home","/home/subService/**","/user/home/**","/user/register",
                         "/user/welcome/**").permitAll()
                 .antMatchers("/expertProfile").hasAnyAuthority("EXPERT")
-                .antMatchers("/admin/**","/admin","/customerProfile/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/admin/**","/admin").hasAnyAuthority("ADMIN")
                 .antMatchers("/customerProfile/**").hasAnyAuthority("CUSTOMER")
-                //.antMatchers(HttpMethod.POST,"/user/register","/user/register/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/user/checkPassword","/user/checkPassword/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/user/checkEmail","/user/checkEmail/**").permitAll()
-                .antMatchers(HttpMethod.GET,"/services","/services/subServices/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/services/**","/services/subServices/**").hasAnyAuthority("ADMIN")
-//                .antMatchers("/services/subServices/**","/services/**","/expertProfile/**").hasAnyAuthority("ADMIN")
-//                .antMatchers(HttpMethod.GET,"/ServiceManagement/allSubServicesByID","/ServiceManagement/allSubServicesByID/**").permitAll()
-//                .antMatchers(HttpMethod.POST,"/user/checkFileSize","/user/checkFileSize/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/services","/services/hasSubServices","/services/subServices/**").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
@@ -49,8 +44,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .successHandler(successHandler)
-//                .defaultSuccessUrl("/home").permitAll()
-//                .successForwardUrl()
                 .failureUrl("/home/loginError")
                 .permitAll()
                 .and()
@@ -70,12 +63,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
-
-//    @Bean
-//    public MultipartResolver multipartResolver() {
-//        return new StandardServletMultipartResolver();
-//    }
-
 
 
     @Bean

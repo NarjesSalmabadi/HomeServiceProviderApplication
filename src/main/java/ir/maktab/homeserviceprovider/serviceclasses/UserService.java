@@ -93,4 +93,8 @@ public class UserService implements UserDetailsService {
         authorities.add(new SimpleGrantedAuthority(user.getUserRole().toString()));
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
+
+    public Optional<User> findUserByEmail(String email){
+        return userDao.findUserByEmail(email);
+    }
 }

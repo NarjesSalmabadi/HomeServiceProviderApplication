@@ -13,7 +13,7 @@ public class ExpertSuggestion {
     private LocalTime startTime;
     @ManyToOne
     Expert expert;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     Reservation reservation;
 
     public Integer getId() {
